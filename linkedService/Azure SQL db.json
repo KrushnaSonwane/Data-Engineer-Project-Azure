@@ -1,0 +1,17 @@
+{
+	"name": "Azure SQL db",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "azureprojectkrushna.database.windows.net",
+			"database": "krushnadb",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "krushna",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEQ3MjYyMjI3LTZEOEUtNEMxMC1BNzgyLTNENDhGMjhFN0YxQ19hYWEzZDQ1Mi0zMDQ4LTQ5MDAtYWEzMy1lNjE2NGQyNGJkZmEiDQp9"
+		}
+	}
+}
