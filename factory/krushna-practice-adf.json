@@ -1,0 +1,9 @@
+{
+	"name": "krushna-practice-adf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "af3451d0-9bda-4571-84de-64e725058d2b",
+		"tenantId": "6d7cf0c3-d60e-4613-a12a-b812af466c85"
+	}
+}
