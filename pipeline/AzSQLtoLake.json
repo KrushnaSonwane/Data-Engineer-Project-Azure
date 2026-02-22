@@ -194,14 +194,14 @@
 							{
 								"name": "cdc",
 								"value": {
-									"value": "@variables('new_file')",
+									"value": "@activity('Script1').output.resultSets[0].rows[0].max",
 									"type": "Expression"
 								}
 							}
 						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
+							"recursive": false,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
