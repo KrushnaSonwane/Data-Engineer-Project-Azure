@@ -15,7 +15,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "empty.json",
+				"fileName": {
+					"value": "@dataset().json_file",
+					"type": "Expression"
+				},
 				"folderPath": "files",
 				"fileSystem": "bronze"
 			}

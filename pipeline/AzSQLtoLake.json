@@ -101,7 +101,10 @@
 					},
 					"dataset": {
 						"referenceName": "json_col",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"json_file": "date_col.json"
+						}
 					},
 					"firstRowOnly": false
 				}
@@ -158,6 +161,106 @@
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
 				}
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Script1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set variable2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "cdc",
+								"value": {
+									"value": "@variables('new_file')",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "json_col",
+						"type": "DatasetReference",
+						"parameters": {
+							"json_file": "empty.json"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "json_col",
+						"type": "DatasetReference",
+						"parameters": {
+							"json_file": "newval.json"
+						}
+					}
+				]
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Script1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "new_file",
+					"value": {
+						"value": "@activity('Script1').output.resultSets[0].rows[0].max",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -173,6 +276,9 @@
 		},
 		"variables": {
 			"file_name": {
+				"type": "String"
+			},
+			"new_file": {
 				"type": "String"
 			}
 		},
