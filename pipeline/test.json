@@ -272,7 +272,7 @@
 									"parameters": {
 										"container": "bronze",
 										"file": {
-											"value": "@variables('current')",
+											"value": "@concat(pipeline().parameters.table, '_', variables('current'))",
 											"type": "Expression"
 										},
 										"folder": "users"
